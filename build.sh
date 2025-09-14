@@ -1,7 +1,7 @@
 export DEBIAN_FRONTEND=noninteractive
 
 set -e 
-cp  apt-proxy /etc/apt/apt.conf.d/00proxy
+
 apt update && apt install -y \
     build-essential \
     dpkg-dev \
