@@ -60,11 +60,9 @@ git clone --depth 1 https://github.com/coreruleset/coreruleset.git /etc/nginx/mo
 cp $CI_PROJECT_DIR/modsec/main.conf /etc/nginx/modsec/main.conf
 
 (cd /nginx/nginx-latest && dpkg-buildpackage -b -us -uc)
-md5sum /nginx/*.deb
 
 mkdir -p $CI_PROJECT_DIR/out
 cp /nginx/nginx_*.deb $CI_PROJECT_DIR/out/ || { echo "No non-dbg .deb found"; exit 1; }
 
-ls -l $CI_PROJECT_DIR/out
-ls -l out
+md5sum $CI_PROJECT_DIR/out/*.deb
 

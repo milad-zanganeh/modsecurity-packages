@@ -1,9 +1,15 @@
 name: Build Nginx ModSecurity Packages
 
+
 on:
   push:
-    branches:
-      - main
+    tags:
+      - 'v*'
+
+
+permissions:
+  contents: write
+
 
 jobs:
   build:
