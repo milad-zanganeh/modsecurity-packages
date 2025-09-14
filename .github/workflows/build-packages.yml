@@ -1,0 +1,34 @@
+name: Build Nginx ModSecurity Packages
+
+name: Build Matrix
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: ubuntu20
+            image: ubuntu:20.04
+          - name: ubuntu22
+            image: ubuntu:22.04
+          - name: ubuntu24
+            image: ubuntu:24.04
+          - name: debian-bullseye
+            image: debian:11
+          - name: debian-bookworm
+            image: debian:12
+
+    name: ${{ matrix.name }}
+    container:
+      image: ${{ matrix.image }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./build.sh
