@@ -1,7 +1,5 @@
 name: Build Nginx ModSecurity Packages
 
-name: Build Matrix
-
 on:
   push:
     branches:
