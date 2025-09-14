@@ -1,5 +1,5 @@
 export DEBIAN_FRONTEND=noninteractive
-
+CI_PROJECT_DIR=$PWD
 set -e 
 
 apt update && apt install -y \
