@@ -68,6 +68,9 @@ cp $CI_PROJECT_DIR/modsec/main.conf /etc/nginx/modsec/main.conf
 mkdir -p $CI_PROJECT_DIR/out
 cp /nginx/nginx_*.deb $CI_PROJECT_DIR/out/ || { echo "No non-dbg .deb found"; exit 1; }
 
-cd $CI_PROJECT_DIR/out
-md5sum *.deb > "$DISTRO"-"$RELEASE".md5sum
+md5sum $CI_PROJECT_DIR/out/*.deb 
 
+echo "Setup CLOUD_CLI"
+apt update && apt install python3 python3-venv -y  &&   python3 -m venv . && source bin/activate && pip3 install cloudsmith-cli
+
+CLOUDSMITH_API_KEY=$NGINX_REPO_API_KEY cloudsmith push deb "nginx/modsecurity/$DISTRO/$RELEASE" "$(ls $CI_PROJECT_DIR/out/*.deb)"
