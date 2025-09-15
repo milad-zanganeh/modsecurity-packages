@@ -30,10 +30,14 @@ apt update && apt install -y \
     vim \
     wget
 
+DISTRO=$(lsb_release -is | tr '[:upper:]' '[:lower:]')
+RELEASE=$(lsb_release -cs)
+
+
 curl https://nginx.org/keys/nginx_signing.key | gpg --dearmor -o /usr/share/keyrings/nginx-archive-keyring.gpg \
-    && echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) nginx" \
+    && echo "deb [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/$DISTRO $RELEASE nginx" \
     | tee /etc/apt/sources.list.d/nginx.list \
-    && echo "deb-src [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/$(lsb_release -is | tr '[:upper:]' '[:lower:]') $(lsb_release -cs) nginx" \
+    && echo "deb-src [signed-by=/usr/share/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/$DISTRO $RELEASE nginx" \
     >> /etc/apt/sources.list.d/nginx.list
 
 /bin/bash -c 'echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n"  | tee /etc/apt/preferences.d/99nginx'
@@ -64,5 +68,6 @@ cp $CI_PROJECT_DIR/modsec/main.conf /etc/nginx/modsec/main.conf
 mkdir -p $CI_PROJECT_DIR/out
 cp /nginx/nginx_*.deb $CI_PROJECT_DIR/out/ || { echo "No non-dbg .deb found"; exit 1; }
 
-md5sum $CI_PROJECT_DIR/out/*.deb
+cd $CI_PROJECT_DIR/out
+md5sum *.deb > "$DISTRO"-"$RELEASE".md5sum
 
