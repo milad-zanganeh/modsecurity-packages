@@ -66,7 +66,7 @@ md5sum nginx_*.deb
 Install it using cli:
 
 ```bash
-sudo dpkg -i ./nginx_*.deb && apt install -f 
+sudo dpkg -i ./nginx_*.deb && sudo apt install -f 
 ```
 
 
