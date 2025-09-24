@@ -35,7 +35,7 @@ if [ -z "$SRC_VER" ]; then
     exit 1
 fi
 
-apt apt install -y \
+apt install -y \
     build-essential \
     dpkg-dev \
     devscripts \
