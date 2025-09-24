@@ -86,4 +86,4 @@ md5sum $CI_PROJECT_DIR/out/*.deb
 echo "Setup CLOUD_CLI"
 apt update && apt install python3 python3-venv -y  &&   python3 -m venv . && . bin/activate && pip3 install cloudsmith-cli
 
-cloudsmith push deb "nginx/modsecurity/$DISTRO/$RELEASE" "$(ls $CI_PROJECT_DIR/out/*.deb)"
+cloudsmith push deb "nginx/modsecurity/$DISTRO/$RELEASE" "$(ls $CI_PROJECT_DIR/out/*.deb)" || echo "WARNING: Cloudsmith push failed (non-fatal).
