@@ -7,7 +7,6 @@ NGINX_VERSION_REQ=$(echo "$TAG_NAME" | sed -E 's/^nginx-//; s/^[vV]//')
 
 
 apt update && apt install -y \
-    software-properties-common \
     curl \
     gnupg2 \
     ca-certificates \
