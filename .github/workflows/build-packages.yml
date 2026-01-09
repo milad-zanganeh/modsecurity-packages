@@ -18,8 +18,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: ubuntu20
-            image: ubuntu:20.04
           - name: ubuntu22
             image: ubuntu:22.04
           - name: ubuntu24
@@ -28,7 +26,8 @@ jobs:
             image: debian:11
           - name: debian-bookworm
             image: debian:12
-
+          - name: debian-trixie
+            image: debian:13
     name: ${{ matrix.name }}
     container:
       image: ${{ matrix.image }}

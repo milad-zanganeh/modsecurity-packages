@@ -4,11 +4,11 @@ Builds Nginx with ModSecurity v3 and the Core Rule Set (CRS) for Ubuntu and Debi
 
 ## Supported distributions
 
-- Ubuntu 20.04 (Focal)
 - Ubuntu 22.04 (Jammy)
 - Ubuntu 24.04 (Noble)
 - Debian 11 (Bullseye)
 - Debian 12 (Bookworm)
+- Debian 13 (Trixie)
 
 ## Install from Cloudsmith repository (recommended)
 
@@ -37,7 +37,7 @@ apt-get install -y debian-keyring  # debian only
 apt-get install -y debian-archive-keyring  # debian only
 apt-get install -y apt-transport-https
 
-# For Debian Stretch, Ubuntu 20.04 and later
+# For Debian Stretch, Ubuntu 22.04 and later
 keyring_location=/usr/share/keyrings/nginx-modsecurity-archive-keyring.gpg
 # For Debian Jessie, Ubuntu 15.10 and earlier
 keyring_location=/etc/apt/trusted.gpg.d/nginx-modsecurity.gpg
