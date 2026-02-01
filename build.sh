@@ -34,13 +34,14 @@ if [ -z "$SRC_VER" ]; then
     exit 1
 fi
 
+
 apt install -y \
     build-essential \
     dpkg-dev \
     devscripts \
     debhelper \
+    libpcre2-dev \
     fakeroot \
-    libpcre3-dev \
     zlib1g-dev \
     libssl-dev \
     git \
@@ -58,11 +59,11 @@ apt install -y \
 mkdir -p /nginx && apt update && (cd /nginx && apt source nginx=$NGINX_VERSION_REQ && mv  $(ls -d /nginx/nginx-*) /nginx/nginx-latest)
 cp $CI_PROJECT_DIR/rules /nginx/nginx-latest/debian/rules
 
-git clone --depth 1 -b v3.0.8 https://github.com/SpiderLabs/ModSecurity.git \
+git clone --depth 1 -b v3.0.14 https://github.com/SpiderLabs/ModSecurity.git \
     && (cd ModSecurity \
     && git submodule update --init \
     && ./build.sh \
-    && ./configure --with-yajl \
+    && ./configure --with-yajl --with-pcre2=/usr/bin/pcre2-config
     && make -j$(nproc) \
     && make install \
     && mkdir -p /usr/local/modsecurity/etc \
