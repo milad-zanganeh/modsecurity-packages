@@ -1,6 +1,5 @@
 #!/bin/bash
 set -e 
-
 export DEBIAN_FRONTEND=noninteractive
 CI_PROJECT_DIR=$PWD
 NGINX_VERSION_REQ=$(echo "$TAG_NAME" | sed -E 's/^nginx-//; s/^[vV]//')
@@ -56,14 +55,14 @@ apt install -y \
     quilt
 
 
-mkdir -p /nginx && apt update && (cd /nginx && apt source nginx=$NGINX_VERSION_REQ && mv  $(ls -d /nginx/nginx-*) /nginx/nginx-latest)
+rm -rf /nginx && mkdir -p /nginx && apt update && (cd /nginx && apt source nginx=$NGINX_VERSION_REQ && mv  $(ls -d /nginx/nginx-*) /nginx/nginx-latest)
 cp $CI_PROJECT_DIR/rules /nginx/nginx-latest/debian/rules
-
+rm -rf ModSecurity
 git clone --depth 1 -b v3.0.14 https://github.com/SpiderLabs/ModSecurity.git \
     && (cd ModSecurity \
     && git submodule update --init \
     && ./build.sh \
-    && ./configure --with-yajl --with-pcre2=/usr/bin/pcre2-config
+    && ./configure --with-yajl --with-pcre2=/usr \
     && make -j$(nproc) \
     && make install \
     && mkdir -p /usr/local/modsecurity/etc \
