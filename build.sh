@@ -71,7 +71,7 @@ git clone --depth 1 -b v3.0.14 https://github.com/SpiderLabs/ModSecurity.git \
 
 git clone --depth 1 https://github.com/SpiderLabs/ModSecurity-nginx.git && mv ModSecurity-nginx /usr/src/modsecurity
 
-git clone --depth 1 https://github.com/coreruleset/coreruleset.git /etc/nginx/modsec
+git clone --depth 1 https://github.com/coreruleset/coreruleset.git /etc/nginx/modsec && rm -rf /etc/nginx/modsec/.git
 
 cp $CI_PROJECT_DIR/modsec/main.conf /etc/nginx/modsec/main.conf
 
