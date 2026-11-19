@@ -6,7 +6,6 @@ Builds Nginx with ModSecurity v3 and the Core Rule Set (CRS) for Ubuntu and Debi
 
 - Ubuntu 22.04 (Jammy)
 - Ubuntu 24.04 (Noble)
-- Debian 11 (Bullseye)
 - Debian 12 (Bookworm)
 - Debian 13 (Trixie)
 

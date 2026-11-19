@@ -22,8 +22,6 @@ jobs:
             image: ubuntu:22.04
           - name: ubuntu24
             image: ubuntu:24.04
-          - name: debian-bullseye
-            image: debian:11
           - name: debian-bookworm
             image: debian:12
           - name: debian-trixie
